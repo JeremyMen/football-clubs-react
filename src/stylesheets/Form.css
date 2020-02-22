@@ -1,0 +1,115 @@
+.Form {
+	width: 570px;
+	margin: 0 auto;
+	padding: 70px 0 40px 0;
+	background-color: #fff;
+}
+.Form.opened {
+	display: block;
+}
+.hd-lg {
+	width:100%;
+	text-align:center;
+	padding: 22px 0 0;
+}
+.hd-lg span {
+	display: block;
+	color: #6e6f70;
+	font-size: 18px;
+	font-weight: 500;
+}
+.hd-lg > img {
+	margin-bottom: 16px;
+}
+.user-account-pr {
+	max-width: 370px;
+	margin: 0 auto;
+	padding: 15px 0 0 0;
+	border-bottom: 1px solid #e2ebef;
+}
+.user-account-pr h4 {
+	color: #C3C3D2;
+	font-weight:400;
+	font-size: 16px;
+	line-height: 19px;
+	margin-bottom:26px;
+}
+.input-sec{
+	width:100%;
+	margin-bottom: 30px;
+	position: relative;
+}
+.input-sec > label {
+	color: #6e6f70;
+	font-size: 14px;
+	margin-top: 8px;
+}
+.field_shp {
+	position: absolute;
+	top: 5px;
+	left: 15px;
+}
+.user-account-pr form {
+	margin-top: 40px;
+	margin-bottom: 7px;
+}
+.user-account-pr form input[type="text"],
+.user-account-pr form input[type="password"],
+.user-account-pr form input[type="email"],
+.user-account-pr form button {
+	height: 38px;
+	padding-left:10px;
+	background-color: #e2ebef;
+	border-radius: 5px;
+	border:none;
+	padding: 0 15px;
+	width: 100%;
+}
+.user-account-pr form button{
+	margin-bottom:18px;
+	color: #fff;
+	background-color: #272626;
+}
+.input-sec{
+	width:100%;
+	margin-bottom: 30px;
+	position: relative;
+}
+.input-sec > label {
+	color: #6e6f70;
+	font-size: 14px;
+	margin-top: 8px;
+}
+.fr-ps {
+	width:100%;
+	padding: 66px 0 66px;
+	text-align:center;
+}
+.fr-ps h1 {
+	color: #6e6f70;
+	font-weight:500;
+	font-size: 18px;
+	line-height: 20px;
+}
+.fr-ps h1 a {
+	display:inline-block;
+	color:#272626;
+}
+@media (max-width: 991px) {
+	.Form {height: 100%;}
+	.fr-ps {padding-bottom: 30px;}
+}
+@media (max-width: 768px) {
+	.Form {overflow-y: auto;}
+	.user-account-pr {max-width: 480px;}
+	.fr-ps {padding-top: 40px;}
+}
+@media (max-width: 576px) {
+	.Form {width: 100%;padding: 0 20px;overflow-y: auto;}
+	.Form {padding-top: 40px;}
+	.fr-ps {padding: 40px 0;}
+}
+@media (max-width: 480px) {
+	.fr-ps {padding: 25px 0 35px;}
+	.fr-ps h1 {line-height: 28px;}
+}

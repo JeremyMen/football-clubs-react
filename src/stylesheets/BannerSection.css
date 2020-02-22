@@ -1,0 +1,57 @@
+.BannerSection {
+	background-color: black;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 200px 0;
+}
+.BannerSection.p120 {
+	padding: 120px 0;
+}
+.banner-text {
+	text-align: center;
+	position: relative;
+}
+.banner-text > h2 {
+	color: #ffffff;
+	font-size: 40px;
+	font-weight: 700;
+	margin-bottom: 36px;
+}
+.banner-text p {
+	color: #fff;
+	font-size: 18px;
+	margin-top: -20px;
+}
+.banner-text > a {
+	display: inline-block;
+	color: #000000;
+	font-size: 16px;
+	background-color: #ffffff;
+	height: 38px;
+	line-height: 38px;
+	padding: 0 25px;
+	border-radius: 30px;
+}
+.banner-section.p120 {
+	padding: 120px 0;
+}
+@media (max-width: 991px) {
+  .banner-section {padding: 140px 0 170px;}
+  .banner-text > h2 {font-size: 30px;margin-bottom: 20px;}
+  .banner-section.p120 .banner-text > h2 {margin-bottom: 35px;}
+  .banner-section.p120 {padding: 75px 0 85px;}
+}
+@media (max-width: 768px) {
+  .banner-section {padding: 80px 0 140px;}
+}
+@media (max-width: 576px) {
+  .banner-text > h2 {padding: 0 70px;font-size: 26px;}
+	.banner-section.p120 .banner-text p {padding: 0 40px;}
+	.banner-section.p120 {padding: 50px 0 55px;}
+}
+@media (max-width: 480px) {
+	.banner-text > h2 {padding: 0;font-size: 22px;}
+	.banner-section {padding: 50px 0 110px;}
+  .banner-section.p120 {padding: 45px 0 50px;}
+  .banner-section.p120 .banner-text p {padding: 0;}
+}
