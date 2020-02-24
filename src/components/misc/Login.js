@@ -1,10 +1,14 @@
 import React from 'react'
 import BannerSection from './BannerSection'
-import LoginForm from './LoginForm'
+import SignupAndSigninForm from './SignupAndSigninForm'
 import '../../stylesheets/Login.css'
+import { Redirect } from 'react-router-dom'
+import { WithAuthConsumer } from '../../contexts/AuthContext'
 
 const Login = (props) => {
-  console.log(props)
+  if (props.currentUser) {
+    return <Redirect to="/Home"/>
+  }
   return(
     <div className="Login wrapper">
       <section>
@@ -15,10 +19,12 @@ const Login = (props) => {
         />
       </section>
       <section>
-        <LoginForm />
+        <SignupAndSigninForm 
+          pathname={ props.location.pathname }
+        />
       </section>
     </div>
   )
 }
 
-export default Login
+export default WithAuthConsumer(Login)

@@ -7,7 +7,10 @@ const http = axios.create({
 
 const createUser = ({ fullName, username, email, password }) => 
   http.post('/login', { fullName, username, email, password })
-const login = ({ email, password }) => http.post('/login', { email, password })
+  
+const login = ({ email, password }) => 
+  http.post('/login', { email, password })
+  
 const logout = () => http.post('/logout')
 
 export default {

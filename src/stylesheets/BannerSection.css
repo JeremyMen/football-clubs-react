@@ -1,6 +1,5 @@
 .BannerSection {
-	background-color: black;
-	background-repeat: no-repeat;
+	background-image: url('./images/offcialBannerSection.jpg');
 	background-size: cover;
 	padding: 200px 0;
 }
@@ -32,26 +31,29 @@
 	padding: 0 25px;
 	border-radius: 30px;
 }
-.banner-section.p120 {
+.BannerSection.p120 {
 	padding: 120px 0;
 }
 @media (max-width: 991px) {
-  .banner-section {padding: 140px 0 170px;}
+  .BannerSection {padding: 140px 0 170px;}
   .banner-text > h2 {font-size: 30px;margin-bottom: 20px;}
-  .banner-section.p120 .banner-text > h2 {margin-bottom: 35px;}
-  .banner-section.p120 {padding: 75px 0 85px;}
+  .BannerSection.p120 .banner-text > h2 {margin-bottom: 35px;}
+  .BannerSection.p120 {padding: 75px 0 85px;}
 }
 @media (max-width: 768px) {
-  .banner-section {padding: 80px 0 140px;}
+	.BannerSection {background-image: url('./images/responsiveBannerSection.jpg');}
+  .BannerSection {padding: 80px 0 140px;}
 }
 @media (max-width: 576px) {
+	.BannerSection {background-image: url('./images/responsiveBannerSection.jpg');}
   .banner-text > h2 {padding: 0 70px;font-size: 26px;}
-	.banner-section.p120 .banner-text p {padding: 0 40px;}
-	.banner-section.p120 {padding: 50px 0 55px;}
+	.BannerSection.p120 .banner-text p {padding: 0 40px;}
+	.BannerSection.p120 {padding: 50px 0 55px;}
 }
 @media (max-width: 480px) {
+	.BannerSection {background-image: url('./images/responsiveBannerSection.jpg');}
 	.banner-text > h2 {padding: 0;font-size: 22px;}
-	.banner-section {padding: 50px 0 110px;}
-  .banner-section.p120 {padding: 45px 0 50px;}
-  .banner-section.p120 .banner-text p {padding: 0;}
+	.BannerSection {padding: 50px 0 110px;}
+  .BannerSection.p120 {padding: 45px 0 50px;}
+  .BannerSection.p120 .banner-text p {padding: 0;}
 }

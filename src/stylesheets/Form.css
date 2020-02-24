@@ -4,6 +4,9 @@
 	padding: 70px 0 40px 0;
 	background-color: #fff;
 }
+.mw-170 {
+	max-width: 170px;
+}
 .Form.opened {
 	display: block;
 }
