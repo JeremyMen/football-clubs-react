@@ -4,10 +4,12 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Login from "./misc/Login"
-import Signup from './misc/Signup';
-import AuthenticatedRoute from './misc/AuthenticatedRoute';
+import Login from "./misc/authentication/Login"
+import Signup from './misc/authentication/Signup';
+import AuthenticatedRoute from './misc/authentication/AuthenticatedRoute';
 import Home from './misc/Home';
+import Validation from './misc/authentication/Validation';
+import NewClub from './club/NewClub';
 
 function App() {
   return (
@@ -16,9 +18,10 @@ function App() {
         <Route exact path="/" component={ Login }/>
         <Route exact path="/login" component={ Login }/>
         <Route exact path="/register" component={ Signup }/>
-
+        <Route exact path="/validation" component={ Validation } />
         <AuthenticatedRoute>
           <Route exact path="/Home" component={ Home } />
+          <Route exact path="/Clubs/new" component={ NewClub } />
         </AuthenticatedRoute>
       </Switch>
     </div>

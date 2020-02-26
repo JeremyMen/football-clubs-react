@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../../stylesheets/Form.css'
-import FootballClubsService from '../../services/FootballClubsService'
-import { Link } from 'react-router-dom';
-import { WithAuthConsumer } from '../../contexts/AuthContext';
+import '../../../stylesheets/Form.css'
+import FootballClubsService from '../../../services/FootballClubsService'
+import { Link, withRouter } from 'react-router-dom';
+import { WithAuthConsumer } from '../../../contexts/AuthContext';
 
 class SignupAndSigninForm extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class SignupAndSigninForm extends Component {
           this.setState({
             error: false
           })
-          this.props.setUser(user)
+        this.props.history.push('/validation')
         })
         .catch(() => {
           this.setState({
@@ -123,7 +123,7 @@ class SignupAndSigninForm extends Component {
       return (
         <div className="Form">
           <div className="hd-lg">
-            <img src="../../../footballClubsLogo.png" alt="logo"  className="mw-170"/>
+            <img src="../../../../footballclubsLogo_Black.png" alt="logo"  className="mw-170"/>
             <span>Register your Football Clubs account</span>
           </div>
 
@@ -145,7 +145,7 @@ class SignupAndSigninForm extends Component {
       return (
         <div className="Form">
           <div className="hd-lg">
-            <img src="../../../footballClubsLogo.png" alt="logo" className="mw-170"/>
+            <img src="../../../../footballclubsLogo_Black.png" alt="logo" className="mw-170"/>
             <span>Log into your Football Clubs account</span>
           </div>
 
@@ -167,4 +167,4 @@ class SignupAndSigninForm extends Component {
   }
 }
 
-export default WithAuthConsumer(SignupAndSigninForm)
+export default withRouter(WithAuthConsumer(SignupAndSigninForm))

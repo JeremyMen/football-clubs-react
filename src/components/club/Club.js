@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../../stylesheets/Club.css'
 
-const Club = () => {
-  
+const Club = (props) => {
+
   return(
     <div className="Club col-sm-6">
 
@@ -11,23 +10,33 @@ const Club = () => {
         <div className="additional">
           <div className="user-card d-flex flex-column justify-content-between">
             <div className="official center mt-3 ml-2 mr-2">
-              Official ✓
+              { props.isOfficialClub }
             </div>
-            <img src="../../../defaultClubEmblem.png" className="mw-100" alt="emblem" />
+            <img src={ props.emblem } className="mw-100" alt="emblem" />
             <div className="members center mb-3 ml-2 mr-2">
-              5,312 Members
+              { props.members } Members
             </div>
             
           </div>
           <div className="more-info">
-            <h4 className="mb-3 mt-2">Inter Club Madrid</h4>
+            <h4 className="mb-3 mt-2">
+              { props.name }
+            </h4>
             <div className="coords">
-              <span>Team: Inter</span>
-              <span>Joined: January 2019</span>
+              <span>
+                Team: { props.team }
+              </span>
+              <span>
+                Joined: { props.createdAt }
+              </span>
             </div>
             <div className="coords">
-              <span>Serie A</span>
-              <span>Madrid, ES</span>
+              <span>
+                League: { props.teamLeague }
+              </span>
+              <span>
+                City: { props.city }
+              </span>
             </div>
             <div className="stats">
               <div>
@@ -49,8 +58,12 @@ const Club = () => {
           </div>
         </div>
         <div className="general">
-          <h4 className="mb-4 mt-2">Inter Club Madrid</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut pulvinar.</p>
+          <h4 className="mb-4 mt-2">
+            { props.name }
+          </h4>
+          <p>
+            { props.description }
+          </p>
           <span className="more">Mouse over the card for more info</span>
         </div>
       </div>

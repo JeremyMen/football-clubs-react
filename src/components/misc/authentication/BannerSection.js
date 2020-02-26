@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../stylesheets/BannerSection.css'
+import '../../../stylesheets/BannerSection.css'
 
 
 const BannerSection = ({ title, description }) => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import BannerSection from './BannerSection';
-import '../../stylesheets/Signup.css'
+import '../../../stylesheets/Signup.css'
 import SignupAndSigninForm from './SignupAndSigninForm';
 import { Redirect } from 'react-router-dom';
-import { WithAuthConsumer } from '../../contexts/AuthContext';
+import { WithAuthConsumer } from '../../../contexts/AuthContext';
 
 const Signup = (props) => {
   if (props.currentUser) {
