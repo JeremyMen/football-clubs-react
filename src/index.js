@@ -7,12 +7,15 @@ import {
   BrowserRouter as Router
 } from "react-router-dom";
 import AuthContextProvider from './contexts/AuthContext';
+import ClubContextProvider from './contexts/ClubContext';
 
 
 ReactDOM.render(
   <Router>
     <AuthContextProvider>
-      <App /> 
+      <ClubContextProvider>
+        <App /> 
+      </ClubContextProvider>
     </AuthContextProvider>
   </Router>,
   document.getElementById('root')

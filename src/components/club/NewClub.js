@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import FootballClubsService from '../../services/FootballClubsService';
 import Navbar from '../misc/Navbar';
 import { WithAuthConsumer } from '../../contexts/AuthContext';
+import { WithClubConsumer } from '../../contexts/ClubContext';
 
 class NewClub extends Component {
   state = { 
@@ -106,12 +107,13 @@ class NewClub extends Component {
     event.preventDefault()
     
     FootballClubsService.createClub({...this.state.data})
-      .then(user => {
+      .then(newClub => {
         this.setState({
           error: false
         })
-        this.props.setUser(user.data)
-        this.props.history.push(`/clubs/${user.club}`)
+        this.props.setMyClub(newClub.data)
+        this.props.setUser({...this.props.currentUser, club: newClub.data.id  })
+        this.props.history.push(`/clubs/${newClub.data.username}`)
       })
       .catch((error) => {
         this.setState({
@@ -120,7 +122,6 @@ class NewClub extends Component {
       })
   }
   
-
   render() { 
     const {
       error,
@@ -249,4 +250,4 @@ class NewClub extends Component {
   }
 }
  
-export default WithAuthConsumer(withRouter(NewClub))
+export default WithClubConsumer(WithAuthConsumer(withRouter(NewClub)))

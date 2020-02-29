@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 import FootballClubsService from '../../services/FootballClubsService'
-import Club from './Club'
+import ClubCard from './ClubCard'
 import { Link } from 'react-router-dom'
 import '../../stylesheets/ClubsList.css'
 
 class ClubsList extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { 
-      data: {
-        clubs: [],
-      },
-      error: undefined
-    }
 
-  this.getNumberOfMembers = (clubUsername) => {
+  state = { 
+    data: {
+      clubs: [],
+    },
+    error: undefined
+  }
+
+  _getNumberOfMembers = (clubUsername) => {
     FootballClubsService.getMembers(clubUsername)
       .then(members => members.length)
       .catch(error => {
@@ -23,40 +22,30 @@ class ClubsList extends Component {
         })
       })
   }
+
+  _setClubs = () => {
+    FootballClubsService.getClubs()
+    .then(clubs => {
+      this.setState({
+        data: {
+          clubs
+        }
+      })
+    })
+    .catch(error => {
+      this.setState({
+        error
+      })
+    })
   }
 
   componentDidMount() {
-    FootballClubsService.getClubs()
-
-      .then(clubs => {
-        this.setState({
-          data: {
-            clubs
-          }
-        })
-      })
-      .catch(error => {
-        this.setState({
-          error
-        })
-      })
-  }
-
-  getNumberOfMembers = (clubUsername) => {
-    FootballClubsService.getMembers(clubUsername)
-      .then(members => members.length)
-      .catch(error => {
-        this.setState({
-          error
-        })
-      })
+    this._setClubs()
   }
 
   render() { 
     const { error } = this.state
     const { clubs } = this.state.data
-    // console.log(this.getNumberOfMembers('interclubmadridlele'))
-
 
     if (error) {
       return(
@@ -71,11 +60,11 @@ class ClubsList extends Component {
     const allClubs = clubs.map((club, index) => {
       return(
         <div key={ index }>
-          <Link to="#" className="color-black">
-            <Club 
+          <Link to={`clubs/${club.username}`} className="color-black">
+            <ClubCard
               username = { club.username }
               isOfficialClub = { club.isOfficialClub  ? 'Official ✓' : 'Unofficial'}
-              // members = { this.getNumberOfMembers }
+              members = { this._getNumberOfMembers }
               name = { club.name }
               emblem = { club.emblem }
               team = { club.team }

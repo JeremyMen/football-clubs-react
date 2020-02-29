@@ -1,0 +1,45 @@
+.w-300 {
+  width: 300px;
+}
+.h-200 {
+	height: 200px;
+}
+.mw-80 {
+  max-width: 80px;
+}
+.mw-30 {
+	max-width: 30px;
+}
+.fs-16 {
+	font-size: 16px;
+}
+.button {
+	height: 38px;
+	padding-left:10px;
+	background-color: #e2ebef;
+	border-radius: 5px;
+	border:none;
+	padding: 0 15px;
+	width: 100%;
+}
+.subscribe-button{
+	margin-bottom:18px;
+	color: #fff;
+	background-color: #26e491;
+}
+.unsubscribe-button{
+	margin-bottom:18px;
+	color: #fff;
+	background-color: black;
+}
+.settings-button{
+	margin-bottom:18px;
+	color: #fff;
+	background-color: black;
+}
+.list-style-none {
+  list-style: none;
+}
+.mw-300 {
+	max-width: 300px;
+}

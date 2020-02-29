@@ -12,10 +12,12 @@ const logout = () => http.post('/logout')
 //users
 const createUser = ({ fullName, username, email, password }) => 
   http.post('/create', { fullName, username, email, password })
+const getUser = (userId) => http.get(`/users/${userId}`)
 
 //clubs
 const createClub = ({ name, teamCountry, teamLeague, team, isOfficialClub, city }) =>
   http.post('/clubs', { name, teamCountry, teamLeague, team, isOfficialClub, city })
+const getClub = (clubUsername) => http.get(`/clubs/${clubUsername}`)
 
 const getClubs = () => http.get('/clubs').then(res => res.data)
 const getMembers = (clubUsername) => http.get(`/clubs/${clubUsername}/users`)
@@ -27,11 +29,15 @@ const getLeague = (leagueName) => http.get(`/teams/${leagueName}`)
 const getCountries = () => http.get('/countries')
 const getLeagueFromCountry = (countryName) => http.get(`/countries/${countryName}/leagues`)
 const getTeamsByLeagueId = (leagueId) => http.get(`/league/${leagueId}/teams`)
+const getLeagueTable = (leagueName, countryName) => http.get(`/leagueTable/${leagueName}/countries/${countryName}`)
+const getNextMatch = (teamName, numberOfMatches) => http.get(`/matches/team/${teamName}/next/${numberOfMatches}`)
+const getPrevioustMatch = (teamName, numberOfMatches) => http.get(`/matches/team/${teamName}/last/${numberOfMatches}`)
 
 export default {
   login,
   logout,
   createUser,
+  getUser,
   createClub,
   getClubs,
   getMembers,
@@ -39,5 +45,9 @@ export default {
   getLeague,
   getCountries,
   getLeagueFromCountry,
-  getTeamsByLeagueId
+  getTeamsByLeagueId,
+  getLeagueTable,
+  getClub,
+  getNextMatch,
+  getPrevioustMatch
 }

@@ -11,8 +11,8 @@ const Validation = () => {
       />
 
       <div className="hd-lg mt-4 mb-4">
-        <img src="../../../footballClubsLogo.png" alt="logo" className="mw-170"/>
-        <span>One last step: We've sent you an email that contains a confirm link.</span>
+        <img src="../../../../footballclubsLogo_Black.png" alt="logo" className="mw-170"/>
+        <span>One last step: we've sent you an email to verify your account.</span>
       </div>
 
       <p>

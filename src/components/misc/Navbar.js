@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../stylesheets/Navbar.css'
 import { WithAuthConsumer } from '../../contexts/AuthContext';
+import { WithClubConsumer } from '../../contexts/ClubContext';
 
 const Navbar = (props) => {
   const { club } = props.currentUser
 
   const logo = 
-    <div className="mw-130 col-sm d-flex align-items-center" >
+    <div className="maxw-100 col-sm d-flex align-items-center" >
       <Link to="/home" title="">
         <img src="../../../footballclubsLogo_Black.png" alt="logo" className="mw-100" />
       </Link>
@@ -32,9 +33,9 @@ const Navbar = (props) => {
   
   const myClubIcon =
     <div>
-      <Link to="/home" className="color-black mr-4 text-decoration-none">
+      <a href={`/clubs/${ props.currentUser.club }`} className="color-black mr-4 text-decoration-none">
         <i className="fa fa-users mr-1 fs-25"></i>MyClub
-      </Link>
+      </a>
     </div>
   
   const newClubIcon = 
@@ -47,7 +48,7 @@ const Navbar = (props) => {
   const dropdownMenu = 
     <ul className="nav ">
       <li className="nav-item dropdown">
-          <div className="nav-link dropdown-toggle mw-130" data-toggle="dropdown">
+          <div className="nav-link dropdown-toggle maxw-100" data-toggle="dropdown">
             <img src={props.currentUser.profilePicture} alt=""  className="mw-100 rounded-circle"/>
           </div>
           <div className="dropdown-menu dropdown-menu-right">
@@ -120,4 +121,4 @@ const Navbar = (props) => {
   }
 }
  
-export default WithAuthConsumer(Navbar);
+export default WithClubConsumer(WithAuthConsumer(Navbar))

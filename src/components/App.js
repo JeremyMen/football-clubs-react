@@ -10,6 +10,7 @@ import AuthenticatedRoute from './misc/authentication/AuthenticatedRoute';
 import Home from './misc/Home';
 import Validation from './misc/authentication/Validation';
 import NewClub from './club/NewClub';
+import ClubPage from './club/ClubPage';
 
 function App() {
   return (
@@ -20,8 +21,11 @@ function App() {
         <Route exact path="/register" component={ Signup }/>
         <Route exact path="/validation" component={ Validation } />
         <AuthenticatedRoute>
-          <Route exact path="/Home" component={ Home } />
-          <Route exact path="/Clubs/new" component={ NewClub } />
+          <Switch>
+            <Route exact path="/Home" component={ Home } />
+            <Route exact path="/Clubs/new" component={ NewClub } />
+            <Route exact strict path="/Clubs/:clubUsernameOrId" component={ ClubPage } />
+          </Switch>
         </AuthenticatedRoute>
       </Switch>
     </div>
