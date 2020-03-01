@@ -5,6 +5,20 @@ const http = axios.create({
   withCredentials: true
 })
 
+http.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response && error.response.status === 401) {
+      localStorage.clear()
+      window.location.assign('/login')
+    } else if (error.response && error.response.status === 404) {
+      window.location.assign('/clubs')
+    }
+
+    return Promise.reject(error)
+  }
+)
+
 //base
 const login = ({ email, password }) => http.post('/login', { email, password })
 const logout = () => http.post('/logout')
@@ -15,8 +29,8 @@ const createUser = ({ fullName, username, email, password }) =>
 const getUser = (userId) => http.get(`/users/${userId}`)
 
 //clubs
-const createClub = ({ name, teamCountry, teamLeague, team, isOfficialClub, city }) =>
-  http.post('/clubs', { name, teamCountry, teamLeague, team, isOfficialClub, city })
+const createClub = (data) =>
+  http.post('/clubs', data)
 const getClub = (clubUsername) => http.get(`/clubs/${clubUsername}`)
 
 const getClubs = () => http.get('/clubs').then(res => res.data)

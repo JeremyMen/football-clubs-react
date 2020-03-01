@@ -9,7 +9,7 @@ const Navbar = (props) => {
 
   const logo = 
     <div className="maxw-100 col-sm d-flex align-items-center" >
-      <Link to="/home" title="">
+      <Link to="/clubs" title="">
         <img src="../../../footballclubsLogo_Black.png" alt="logo" className="mw-100" />
       </Link>
     </div>
@@ -26,7 +26,7 @@ const Navbar = (props) => {
     
   const homeIcon =
     <div>
-      <Link to="/home" className="color-black mr-4 text-decoration-none">
+      <Link to="/clubs" className="color-black mr-4 text-decoration-none">
         <i className="fa fa-home mr-1 fs-25"></i>Home
       </Link>
     </div>

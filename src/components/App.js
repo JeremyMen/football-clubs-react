@@ -22,7 +22,7 @@ function App() {
         <Route exact path="/validation" component={ Validation } />
         <AuthenticatedRoute>
           <Switch>
-            <Route exact path="/Home" component={ Home } />
+            <Route exact path="/Clubs" component={ Home } />
             <Route exact path="/Clubs/new" component={ NewClub } />
             <Route exact strict path="/Clubs/:clubUsernameOrId" component={ ClubPage } />
           </Switch>

@@ -15,7 +15,10 @@ class NewClub extends Component {
       teamLeague: "",
       team: "",
       isOfficialClub: "",
-      city: ""
+      city: "",
+      address: "",
+      description: "",
+      emblem: null
     },
     previousData: {
       lastTeamCountry: undefined,
@@ -94,32 +97,63 @@ class NewClub extends Component {
   }
 
   handleChange = (event) => {
-    const { name, value } = event.target
+    const { name, value, files } = event.target
     this.setState({
       data: {
         ...this.state.data,
-        [name]: value
+        [name]: files ? files[0] : value
       }
     })
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
+
+    const { data } = this.state
+
     
-    FootballClubsService.createClub({...this.state.data})
-      .then(newClub => {
-        this.setState({
-          error: false
+    
+    const formData = new FormData()
+    formData.append('name', data.name)
+    formData.append('teamCountry', data.teamCountry)
+    formData.append('teamLeague', data.teamLeague)
+    formData.append('team', data.team)
+    formData.append('isOfficialClub', data.isOfficialClub)
+    formData.append('city', data.city)
+    formData.append('address', data.address)
+    formData.append('description', data.description)
+    formData.append('emblem', data.emblem)
+    
+    this.setState({error: false}, () => {
+      console.log(formData)
+      FootballClubsService.createClub(formData)
+        .then(newClub => {
+          this.props.setMyClub(newClub.data)
+          this.props.setUser({...this.props.currentUser, club: newClub.data.id  })
+          this.props.history.push(`/clubs/${newClub.data.username}`)
         })
-        this.props.setMyClub(newClub.data)
-        this.props.setUser({...this.props.currentUser, club: newClub.data.id  })
-        this.props.history.push(`/clubs/${newClub.data.username}`)
-      })
-      .catch((error) => {
-        this.setState({
-          error: true
+        .catch((error) => {
+          this.setState({
+            error: true
+          })
         })
-      })
+    })
+
+    
+    // FootballClubsService.createClub(formData)
+    //   .then(newClub => {
+    //     this.setState({
+    //       error: false
+    //     })
+    //     this.props.setMyClub(newClub.data)
+    //     this.props.setUser({...this.props.currentUser, club: newClub.data.id  })
+    //     this.props.history.push(`/clubs/${newClub.data.username}`)
+    //   })
+    //   .catch((error) => {
+    //     this.setState({
+    //       error: true
+    //     })
+    //   })
   }
   
   render() { 
@@ -164,9 +198,32 @@ class NewClub extends Component {
                 />
               </div>
 
+              <div className="input-sec">
+                <input 
+                  value={this.state.data.address}
+                  onChange={this.handleChange}
+                  className={`form-control ${errorClassName}`}
+                  type="text" 
+                  name="address" 
+                  placeholder="Club address" 
+                />
+              </div>
+
+              <div className="input-sec">
+                <textarea id="w3mission" rows="4" cols="50" 
+                  value={this.state.data.description}
+                  onChange={this.handleChange}
+                  className={`form-control ${errorClassName}`}
+                  type="text" 
+                  name="description" 
+                  placeholder="Club description" 
+                />
+              </div>
+
               <div className="input-sec d-flex justify-content-between">
                 <label className="mr-2">Is it an official club?</label>
-                <select id="isOfficialClub" name="isOfficialClub"  onChange={this.handleChange}>
+                <select id="isOfficialClub" name="isOfficialClub" className="mw-165"  onChange={this.handleChange}>
+                  <option> -- select an option -- </option>
                   <option
                     type="text"
                     value={true}
@@ -184,12 +241,13 @@ class NewClub extends Component {
 
               <div className="input-sec d-flex justify-content-between">
                 <label className="mr-2">select the team country</label>
-                <select id="teamCountry" name="teamCountry" onChange={ this.handleChange }>
+                <select id="teamCountry" name="teamCountry" className="mw-165" onChange={ this.handleChange }>
+                  <option key="0" name="teamCountry"> -- select an option -- </option>
                 { 
                   allCountries.map((country, index) => {
                     return (
                       <option
-                        key={index}
+                        key={index + 1}
                         name="teamCountry"
                         value={ country.country }
                       >
@@ -203,12 +261,13 @@ class NewClub extends Component {
 
               <div className="input-sec d-flex justify-content-between">
                 <label className="mr-2">select the team league</label>
-                <select id="teamLeague" name="teamLeague" onChange={ this.handleChange }>
+                <select id="teamLeague" name="teamLeague" className="mw-165" onChange={ this.handleChange }>
+                  <option key="0" name="teamLeague"> -- select an option -- </option>
                   { 
                     countryLeagues.map((leagues, index) => {
                       return(
                         <option
-                          key={index}
+                          key={index + 1}
                           name="teamLeague"
                           value={ leagues.name }
                         >
@@ -222,12 +281,14 @@ class NewClub extends Component {
 
               <div className="input-sec d-flex justify-content-between">
                 <label className="mr-2">select the team</label>
-                <select id="team" name="team" onChange={ this.handleChange }>
+                <select id="team" name="team" className="mw-165" onChange={ this.handleChange }>
+                  <option key="0" name="team"> -- select an option -- </option>
+
                   { 
                     teams.map((team, index) => {
                       return(
                         <option
-                          key={index}
+                          key={index + 1}
                           name="team"
                           value={ team.name }
                         >
@@ -237,6 +298,17 @@ class NewClub extends Component {
                     })
                   }
                 </select>
+              </div>
+
+              <div className="input-sec d-flex justify-content-between">
+                <label htmlFor="emblem">Emblem</label>
+                <input
+                  onChange={this.handleChange}
+                  name="emblem"
+                  type="file"
+                  className={`form-control ${errorClassName} mw-165`}
+                  id="emblem"
+                />
               </div>
             
               <div className="input-sec mb-0">

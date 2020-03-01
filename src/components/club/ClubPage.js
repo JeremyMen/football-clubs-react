@@ -126,6 +126,8 @@ class ClubPage extends Component {
       admin, 
     } = this.state
 
+    console.log(this.state)
+
     return (  
       <div className="ClubPage container">
 
@@ -148,7 +150,7 @@ class ClubPage extends Component {
 
         <section className="container mt-5">
           <div className="row d-flex">
-            <ClubMiniTable 
+            {/* <ClubMiniTable 
               logoClub={ currentClub.emblem }
               team={ currentClub.team }
               city={ currentClub.city }
@@ -160,19 +162,19 @@ class ClubPage extends Component {
               venueName={ currentTeamInfo.venue_name }
               venueAddress={ currentTeamInfo.venue_address }
               venueCapacity={ currentTeamInfo.venue_capacity }
-            />
+            /> */}
             <div className="text-left description col-sm-8 mt-4">
               <h5><b>Description</b></h5>
               <p>
-              Welcome to the official Saturday Night Live channel on YouTube!  Here you will find your favorite sketches, behind the scenes clips and web exclusives, featuring all your favorite hosts and cast members.  Check out more SNL at 
+                {currentClub.description}
               </p>
               <hr />
-              <FootballTable 
+              {/* <FootballTable 
                 teamLeague={ currentClub.teamLeague }
                 teamCountry={ currentClub.teamCountry }
-              />
+              /> */}
               <div className="d-flex">
-                <Match />
+                {/* <Match /> */}
               </div>
             </div>
           </div>
