@@ -16,8 +16,23 @@ class FootballTable extends Component {
     FootballClubsService.getLeagueTable(teamLeague, teamCountry)
       .then(res => {
         if (this._isMounted) {
+          const leagueTableAsElement = res.data.api.standings[0].map((team, index) => {
+            return (
+              <FootballTableRow 
+                logo={team.logo}
+                key={ index }
+                position={team.rank}
+                team={team.teamName}
+                played={team.all.matchsPlayed}
+                won={team.all.win}
+                draw={team.all.draw}
+                lost={team.all.lose}
+                point={team.points}
+              />
+            )
+            })
           this.setState({
-            leagueTable: res.data.api.standings[0]
+            leagueTable: leagueTableAsElement
           })
         }
       })
@@ -29,16 +44,13 @@ class FootballTable extends Component {
     this._setLeagueTable(teamLeague, teamCountry) 
   }
 
-  componentDidUpdate = () => {
-    this._isMounted = true
-    if(!this.state.leagueTable.length) {
-      const { teamLeague, teamCountry } = this.props.currentClub
-      this._setLeagueTable(teamLeague, teamCountry)  
-    }
+  componentDidUpdate = (prevProps, prevState) => {
+    const { teamLeague, teamCountry } = this.props.currentClub
+    this._setLeagueTable(teamLeague, teamCountry)  
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    return nextState.leagueTable !== this.state.leagueTable
+    return (JSON.stringify(nextState.leagueTable) !== JSON.stringify(this.state.leagueTable))
   }
   
   componentWillUnmount = () => {
@@ -47,21 +59,21 @@ class FootballTable extends Component {
 
   render() { 
     const { leagueTable } = this.state
-    const rows = leagueTable.map((team, index) => {
-      return (
-        <FootballTableRow 
-          logo={team.logo}
-          key={ index }
-          position={team.rank}
-          team={team.teamName}
-          played={team.all.matchsPlayed}
-          won={team.all.win}
-          draw={team.all.draw}
-          lost={team.all.lose}
-          point={team.points}
-        />
-      )
-    })
+    // const rows = leagueTable.map((team, index) => {
+    //   return (
+    //     <FootballTableRow 
+    //       logo={team.logo}
+    //       key={ index }
+    //       position={team.rank}
+    //       team={team.teamName}
+    //       played={team.all.matchsPlayed}
+    //       won={team.all.win}
+    //       draw={team.all.draw}
+    //       lost={team.all.lose}
+    //       point={team.points}
+    //     />
+    //   )
+    // })
     return (  
       <div>
         <a className="dropdown-toggle" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -80,7 +92,7 @@ class FootballTable extends Component {
             </tr>
           </thead>
           <tbody>
-            { rows }
+            { leagueTable }
           </tbody>
         </table>
       </div>

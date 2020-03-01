@@ -37,7 +37,6 @@ class ClubPage extends Component {
       })
   }
 
-  
   _setAdmin = (adminId) => {
     FootballClubsService.getUser(adminId)
     .then(admin => {
@@ -99,17 +98,27 @@ class ClubPage extends Component {
   componentDidMount = () => {
     this._isMounted = true
     const { username } = this.props.myClub
-    const { admin, team } = this.props.currentClub
+    const { admin } = this.props.currentClub
     this._setCurrentClub()
     this._setNumberOfMembers(username)
     this._setAdmin(admin)
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {        
+    if (nextState !== this.state) {      
+      return true 
+    } else if (nextProps !== this.props) {
+      return true 
+    } else {
+      return false
+    }
   }
 
   componentWillUnmount = () => {
     this._isMounted = false
   }
 
-  render() { 
+  render() {     
     const { 
       currentClub, 
       numberOfMembers, 

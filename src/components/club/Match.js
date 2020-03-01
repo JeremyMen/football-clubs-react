@@ -56,18 +56,22 @@ class Match extends Component {
   componentDidUpdate = () => {
     this._isMounted = true
     const { team } = this.props.currentClub
-    const { nextMatches, previousMatches } = this.state
+    // const { nextMatches, previousMatches } = this.state
     
-    if (!nextMatches) {
       this._setNextMatch(team, 1)
-    }
-    if (!previousMatches) {
+    
       this._setPrevioustMatch(team, 1)
-    }
+    
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    return nextState !== this.state
+    if (JSON.stringify(nextState.nextMatches) !== JSON.stringify(this.state.nextMatches)) {
+      return true
+    } else if (JSON.stringify(nextState.previousMatches) !== JSON.stringify(this.state.previousMatches)) {
+      return true
+    } else {
+      return false
+    }
   }
 
   componentWillUnmount = () => {
