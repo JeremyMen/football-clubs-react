@@ -110,9 +110,6 @@ class NewClub extends Component {
     event.preventDefault()
 
     const { data } = this.state
-
-    
-    
     const formData = new FormData()
     formData.append('name', data.name)
     formData.append('teamCountry', data.teamCountry)
@@ -125,7 +122,6 @@ class NewClub extends Component {
     formData.append('emblem', data.emblem)
     
     this.setState({error: false}, () => {
-      console.log(formData)
       FootballClubsService.createClub(formData)
         .then(newClub => {
           this.props.setMyClub(newClub.data)

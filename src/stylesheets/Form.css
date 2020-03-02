@@ -98,6 +98,9 @@
 	display:inline-block;
 	color:#272626;
 }
+.color-red {
+	color: red;
+}
 @media (max-width: 991px) {
 	.Form {height: 100%;}
 	.fr-ps {padding-bottom: 30px;}

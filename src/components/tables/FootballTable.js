@@ -7,7 +7,8 @@ class FootballTable extends Component {
   constructor(props) {
     super(props)
     this.state = {  
-      leagueTable: []
+      leagueTable: [],
+      errorMessage: ''
     }
     this._isMounted = false
   }
@@ -36,6 +37,11 @@ class FootballTable extends Component {
           })
         }
       })
+      .catch(err => {
+        this.setState({
+          errorMessage: err.response.data.message
+        })
+      })
   }
 
   componentDidMount = () => {
@@ -59,21 +65,7 @@ class FootballTable extends Component {
 
   render() { 
     const { leagueTable } = this.state
-    // const rows = leagueTable.map((team, index) => {
-    //   return (
-    //     <FootballTableRow 
-    //       logo={team.logo}
-    //       key={ index }
-    //       position={team.rank}
-    //       team={team.teamName}
-    //       played={team.all.matchsPlayed}
-    //       won={team.all.win}
-    //       draw={team.all.draw}
-    //       lost={team.all.lose}
-    //       point={team.points}
-    //     />
-    //   )
-    // })
+
     return (  
       <div>
         <a className="dropdown-toggle" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">

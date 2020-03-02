@@ -1,0 +1,76 @@
+/* .profile_area .col-lg-7 {
+  vertical-align: middle;
+  align-self: center; 
+}
+.height-351 {
+  height: 351.95px;
+}
+.mw-290 {
+  max-width: 290px;
+}
+.font-size-larger {
+  font-size: larger;
+} */
+.mw-200 {
+  max-width: 200px;
+}
+.profile-content {
+  margin-top: 100px;
+}
+.main-raised {
+  border-radius: 6px;
+  box-shadow: 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2)
+}
+
+.background-field {
+  background-image: linear-gradient(to bottom, rgba(3, 3, 3, 0) 20%, rgb(252, 252, 252) 100%), url("../../src/stylesheets//images/soccer-field-bg.jpg");
+  /* background: url("../../src/stylesheets//images/soccer-field-bg.jpg") no-repeat; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 6px;
+}
+
+.profile-page .profile {
+  text-align: center;
+}
+.text-larger {
+  font-size: larger;
+}
+.profile-page .profile img {
+  max-width: 160px;
+  width: 100%;
+  margin: 0 auto;
+  transform: translate3d(0,-50%,0);
+}
+
+.img-raised {
+  box-shadow: 0 5px 15px -8px rgba(0,0,0,.24), 0 8px 10px -5px rgba(0,0,0,.2);
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.user-name {
+  margin-top: 30px;
+  margin-bottom: 25px;
+  min-height: 32px;
+  font-weight: 700;
+  font-family: "Roboto Slab","Times New Roman",serif;
+}
+.profile-page .profile .name{
+  margin-top: -80px;
+}
+
+.unstyled {
+  list-style-type: none;
+}
+
+img.rounded {
+  border-radius: 6px!important;
+}
+
+.tab-content>.active {
+  display: block;
+}

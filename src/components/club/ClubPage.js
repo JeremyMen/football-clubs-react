@@ -6,6 +6,7 @@ import { WithClubConsumer } from '../../contexts/ClubContext';
 import FootballClubsService from '../../services/FootballClubsService';
 import ClubMiniTable from '../tables/ClubMiniTable';
 import Match from './Match';
+import { Link } from 'react-router-dom';
 
 class ClubPage extends Component {
   state = { 
@@ -28,6 +29,8 @@ class ClubPage extends Component {
           this.props.setCurrentClub(club.data)
           const { team } = this.state.currentClub
           this._setCurrentTeamInfo(team)
+          this._setNumberOfMembers(club.data.username)
+          this._setAdmin(club.data.admin[0])
         }
       })
       .catch(error => {
@@ -97,17 +100,18 @@ class ClubPage extends Component {
 
   componentDidMount = () => {
     this._isMounted = true
-    const { username } = this.props.myClub
-    const { admin } = this.props.currentClub
     this._setCurrentClub()
-    this._setNumberOfMembers(username)
-    this._setAdmin(admin)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {        
-    if (nextState !== this.state) {      
-      return true 
-    } else if (nextProps !== this.props) {
+  componentDidUpdate = () => {
+
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {  
+    const { currentClub, currentTeamInfo } = this.state   
+    if (JSON.stringify(nextState.currentClub) !== JSON.stringify(currentClub)) {      
+      return true
+    } else if (JSON.stringify(nextState.currentTeamInfo) !== JSON.stringify(currentTeamInfo)) {
       return true 
     } else {
       return false
@@ -144,13 +148,15 @@ class ClubPage extends Component {
           <div className="align-self-center d-flex">
             <button className="button subscribe-button">Subscribe</button>
             <button className="button unsubscribe-button">Unubscribe</button>
-            <button className="button settings-button">Settings</button>
+            <Link to={`/clubs/${currentClub.username}/edit`}>
+              <button className="button settings-button">Settings</button>
+            </Link>
           </div>
         </div>
 
         <section className="container mt-5">
           <div className="row d-flex">
-            {/* <ClubMiniTable 
+            <ClubMiniTable 
               logoClub={ currentClub.emblem }
               team={ currentClub.team }
               city={ currentClub.city }
@@ -162,19 +168,19 @@ class ClubPage extends Component {
               venueName={ currentTeamInfo.venue_name }
               venueAddress={ currentTeamInfo.venue_address }
               venueCapacity={ currentTeamInfo.venue_capacity }
-            /> */}
+            />
             <div className="text-left description col-sm-8 mt-4">
               <h5><b>Description</b></h5>
               <p>
                 {currentClub.description}
               </p>
               <hr />
-              {/* <FootballTable 
+              <FootballTable 
                 teamLeague={ currentClub.teamLeague }
                 teamCountry={ currentClub.teamCountry }
-              /> */}
+              />
               <div className="d-flex">
-                {/* <Match /> */}
+                <Match />
               </div>
             </div>
           </div>

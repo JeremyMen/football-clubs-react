@@ -12,20 +12,22 @@ class SignupAndSigninForm extends Component {
         fullName: '',
         username: '',
         email: '',
-        password: ''
+        password: '',
+        profilePicture: ''
       },
-      error: false
+      error: false,
+      errorMessage: ''
     }
 
   }
 
   handleChange = (event) => {
-    const { name, value } = event.target
+    const { name, value, files } = event.target
 
     this.setState({
       data: {
         ...this.state.data,
-        [name]: value
+        [name]: files ? files[0] : value
       }
     })
   }
@@ -33,18 +35,27 @@ class SignupAndSigninForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     const { pathname } = this.props
+    const { data } = this.state
+    const formData = new FormData()
+    
+    formData.append('fullName', data.fullName)
+    formData.append('username', data.username)
+    formData.append('email', data.email)
+    formData.append('password', data.password)
+    formData.append('profilePicture', data.profilePicture)
 
     if (pathname === '/register') {
-      FootballClubsService.createUser({ ...this.state.data })
-        .then(user => {
+      FootballClubsService.createUser(formData)
+        .then(() => {
           this.setState({
             error: false
           })
         this.props.history.push('/validation')
         })
-        .catch(() => {
+        .catch((err) => {
           this.setState({
-            error: true
+            error: true,
+            errorMessage: err.response.data.message
           })
         })  
     } else if (pathname === '/login'){
@@ -55,9 +66,11 @@ class SignupAndSigninForm extends Component {
         })
         this.props.setUser(user.data)
       })
-      .catch(() => {
+      .catch((err) => {
         this.setState({
-          error: true
+          error: true,
+          errorMessage: err.response.data.message
+
         })
       }) 
     }
@@ -67,6 +80,9 @@ class SignupAndSigninForm extends Component {
   render() {
     const errorClassName = this.state.error ? 'is-invalid' : ''
     const { pathname } = this.props
+    const errorMessage = this.state.errorMessage ? 
+      this.state.errorMessage :
+      ''
 
     const loginForm = 
       <div>
@@ -117,6 +133,18 @@ class SignupAndSigninForm extends Component {
       </div>
 
       { loginForm }
+
+      <div className="input-sec d-flex justify-content-between">
+        <label htmlFor="profilePicture">Profile picture</label>
+        <input
+          onChange={this.handleChange}
+          name="profilePicture"
+          type="file"
+          className={`form-control ${errorClassName} mw-165`}
+          id="profilePicture"
+        />
+      </div>
+
     </div>
 
     if (pathname === '/register') {
@@ -132,6 +160,9 @@ class SignupAndSigninForm extends Component {
               { registerForm }
               <div className="input-sec mb-0">
                 <button type="submit">Signup</button>
+              </div>
+              <div className="color-red">
+                {errorMessage}
               </div>
             </form>
           </div>
@@ -154,6 +185,9 @@ class SignupAndSigninForm extends Component {
               { loginForm }
             <div className="input-sec mb-0">
               <button type="submit">Login</button>
+            </div>
+            <div className="color-red">
+              {errorMessage}
             </div>
             </form>
           </div>

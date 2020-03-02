@@ -11,8 +11,6 @@ http.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       localStorage.clear()
       window.location.assign('/login')
-    } else if (error.response && error.response.status === 404) {
-      window.location.assign('/clubs')
     }
 
     return Promise.reject(error)
@@ -24,18 +22,19 @@ const login = ({ email, password }) => http.post('/login', { email, password })
 const logout = () => http.post('/logout')
 
 //users
-const createUser = ({ fullName, username, email, password }) => 
-  http.post('/create', { fullName, username, email, password })
-const getUser = (userId) => http.get(`/users/${userId}`)
+const createUser = (data) => http.post('/create', data)
+const getUser = (data) => http.get(`/users/${data}`)
+const updateUser = (userUsername, data) => http.patch(`/users/${userUsername}`, data)
+const deleteUser = (userUsername) => http.delete(`/users/${userUsername}`)
 
 //clubs
-const createClub = (data) =>
-  http.post('/clubs', data)
+const createClub = (data) => http.post('/clubs', data)
 const getClub = (clubUsername) => http.get(`/clubs/${clubUsername}`)
-
 const getClubs = () => http.get('/clubs').then(res => res.data)
-const getMembers = (clubUsername) => http.get(`/clubs/${clubUsername}/users`)
-  .then(users => users.data)
+const getMembers = (clubUsername) => http.get(`/clubs/${clubUsername}/users`).then(users => users.data)
+const updateClub = (clubUsername, data) => http.patch(`/clubs/${clubUsername}`, data)
+const deleteClub = (clubUsername) => http.delete(`/clubs/${clubUsername}`)
+
 
 //apiFootball
 const getTeam = (teamName) => http.get(`/teams/${teamName}`)
@@ -51,9 +50,13 @@ export default {
   login,
   logout,
   createUser,
+  updateUser,
   getUser,
+  deleteUser,
   createClub,
   getClubs,
+  updateClub,
+  deleteClub,
   getMembers,
   getTeam,
   getLeague,

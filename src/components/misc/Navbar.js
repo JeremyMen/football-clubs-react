@@ -56,13 +56,13 @@ const Navbar = (props) => {
             <div className="dropdown-divider"></div>
 
             <div className="dropdown-item">
-              <Link to="#" className="color-black text-decoration-none">
+              <Link to={`/users/${props.currentUser.username}`} className="color-black text-decoration-none">
                 <i className="fa fa-user mr-2"></i>MyProfile
               </Link>
             </div>
             
             <div className="dropdown-item">
-              <Link to="#" className="color-black text-decoration-none">
+              <Link to={`/users/${props.currentUser.username}/edit`} className="color-black text-decoration-none">
                 <i className="fa fa-cog mr-2"></i>Settings
               </Link>
             </div>
