@@ -7,7 +7,7 @@ import { WithAuthConsumer } from '../../../contexts/AuthContext';
 
 const Signup = (props) => {
   if (props.currentUser) {
-    return <Redirect to="/Home"/>
+    return <Redirect to="/Clubs"/>
   }
   return(
     <div className="Signup wrapper">

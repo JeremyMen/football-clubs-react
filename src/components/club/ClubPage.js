@@ -9,11 +9,14 @@ import Match from './Match';
 import { Link } from 'react-router-dom';
 
 class ClubPage extends Component {
-  state = { 
-    currentClub: {},
-    currentTeamInfo: {},
-    numberOfMembers: 0,
-    admin: undefined,
+  constructor(props) {
+    super(props) 
+    this.state = { 
+      currentClub: {},
+      currentTeamInfo: {},
+      numberOfMembers: 0,
+      admin: undefined,
+    }
   }
 
   _isMounted = false
@@ -27,8 +30,7 @@ class ClubPage extends Component {
             currentClub: club.data
           })
           this.props.setCurrentClub(club.data)
-          const { team } = this.state.currentClub
-          this._setCurrentTeamInfo(team)
+          this._setCurrentTeamInfo(club.data.team)
           this._setNumberOfMembers(club.data.username)
           this._setAdmin(club.data.admin[0])
         }
@@ -104,7 +106,8 @@ class ClubPage extends Component {
   }
 
   componentDidUpdate = () => {
-
+    this._isMounted = true
+    this._setCurrentClub()
   }
 
   shouldComponentUpdate(nextProps, nextState) {  
@@ -112,6 +115,10 @@ class ClubPage extends Component {
     if (JSON.stringify(nextState.currentClub) !== JSON.stringify(currentClub)) {      
       return true
     } else if (JSON.stringify(nextState.currentTeamInfo) !== JSON.stringify(currentTeamInfo)) {
+      return true 
+    } else if (JSON.stringify(nextProps.currentClub) !== JSON.stringify(this.props.currentClub)) {
+      return true 
+    } else if (JSON.stringify(nextProps.myClub) !== JSON.stringify(this.props.myClub)) {
       return true 
     } else {
       return false
@@ -129,8 +136,6 @@ class ClubPage extends Component {
       currentTeamInfo, 
       admin, 
     } = this.state
-
-    console.log(this.state)
 
     return (  
       <div className="ClubPage container">
@@ -178,9 +183,12 @@ class ClubPage extends Component {
               <FootballTable 
                 teamLeague={ currentClub.teamLeague }
                 teamCountry={ currentClub.teamCountry }
+                params= { this.props.match.params }
               />
               <div className="d-flex">
-                <Match />
+                <Match 
+                  params= { this.props.match.params }
+                />
               </div>
             </div>
           </div>

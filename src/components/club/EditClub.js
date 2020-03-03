@@ -59,12 +59,13 @@ class Edit extends Component {
         this.setState({
           error: false
         })
-        this.props.setMyClub()
+        this.props.setMyClub(null)
+        this.props.setCurrentClub(null)
         this.props.history.push(`/clubs`)
       })
       .catch(err => {
         this.setState({
-          errorMessage: err.response.data.message
+          errorMessage: err
         })
       })
 
@@ -89,84 +90,85 @@ class Edit extends Component {
   }
   render() { 
     const errorClassName = this.state.error ? 'is-invalid' : ''
-
     const errorMessage = this.state.errorMessage ? 
       this.state.errorMessage :
       ''
+    if (this.props.currentClub) {
+      const admin = this.props.currentClub.admin[0]
+      const userId = this.props.currentUser.id
 
-    const admin = this.props.currentClub.admin[0]
-    const userId = this.props.currentUser.id
-    
-    if (admin !== userId) {
-      return <Redirect to={`/clubs/${this.props.currentClub.username}`} />
+      
+      if (admin !== userId) {
+        return <Redirect to={`/clubs/${this.props.currentClub.username}`} />
+      } else {
+        return (  
+          
+          <div className="Edit container">
+            <Navbar />
+            <div className="hd-lg">
+              <span>Edit your Football Club</span>
+            </div>
+            <div className="user-account-pr">
+              <form onSubmit={this.handleSubmit}>
+                <div className="input-sec">
+                  <input 
+                    value={this.state.data.name}
+                    onChange={this.handleChange}
+                    className={`form-control ${errorClassName}`}
+                    type="text" 
+                    name="name" 
+                    placeholder="Name" 
+                  />
+                </div>
+                <div className="input-sec">
+                  <input 
+                    value={this.state.data.city}
+                    onChange={this.handleChange}
+                    className={`form-control ${errorClassName}`}
+                    type="text" 
+                    name="city" 
+                    placeholder="City" 
+                  />
+                </div>
+                <div className="input-sec">
+                  <input 
+                    value={this.state.data.address}
+                    onChange={this.handleChange}
+                    className={`form-control ${errorClassName}`}
+                    type="text" 
+                    name="address" 
+                    placeholder="Address" 
+                  />
+                </div>
+                <div className="input-sec d-flex justify-content-between">
+                  <label htmlFor="profilePicture">Emblem</label>
+                  <input
+                    onChange={this.handleChange}
+                    name="emblem"
+                    type="file"
+                    className={`form-control ${errorClassName} mw-165`}
+                    id="emblem"
+                  />
+                </div>
+                <div className="input-sec mb-0">
+                  <button type="submit">Edit</button>
+                </div>
+              </form>
+              <form onClick={this.deleteAccount}>
+                <div className="input-sec mb-0">
+                  <button className={`form-control ${errorClassName}`} type="submit">Delete</button>
+                </div>
+                <div className="color-red">
+                  {errorMessage}
+                </div>
+              </form>
+            </div>
+          </div>
+        );
+      }
     } else {
-      return (  
-        
-        <div className="Edit container">
-          <Navbar />
-          <div className="hd-lg">
-            <span>Edit your Football Club</span>
-          </div>
-          <div className="user-account-pr">
-            <form onSubmit={this.handleSubmit}>
-              <div className="input-sec">
-                <input 
-                  value={this.state.data.name}
-                  onChange={this.handleChange}
-                  className={`form-control ${errorClassName}`}
-                  type="text" 
-                  name="name" 
-                  placeholder="Name" 
-                />
-              </div>
-              <div className="input-sec">
-                <input 
-                  value={this.state.data.city}
-                  onChange={this.handleChange}
-                  className={`form-control ${errorClassName}`}
-                  type="text" 
-                  name="city" 
-                  placeholder="City" 
-                />
-              </div>
-              <div className="input-sec">
-                <input 
-                  value={this.state.data.address}
-                  onChange={this.handleChange}
-                  className={`form-control ${errorClassName}`}
-                  type="text" 
-                  name="address" 
-                  placeholder="Address" 
-                />
-              </div>
-              <div className="input-sec d-flex justify-content-between">
-                <label htmlFor="profilePicture">Emblem</label>
-                <input
-                  onChange={this.handleChange}
-                  name="emblem"
-                  type="file"
-                  className={`form-control ${errorClassName} mw-165`}
-                  id="emblem"
-                />
-              </div>
-              <div className="input-sec mb-0">
-                <button type="submit">Edit</button>
-              </div>
-            </form>
-            <form onClick={this.deleteAccount}>
-              <div className="input-sec mb-0">
-                <button className={`form-control ${errorClassName}`} type="submit">Delete</button>
-              </div>
-              <div className="color-red">
-                {errorMessage}
-              </div>
-            </form>
-          </div>
-        </div>
-      );
+      return <Redirect to="/Clubs"/>
     }
-
-    
   }
 }
  

@@ -1,5 +1,6 @@
 import React, { createContext, Component } from 'react';
 import FootballClubsService from '../services/FootballClubsService';
+import { WithClubConsumer } from './ClubContext';
 
 const AuthContext = createContext()
 
@@ -41,4 +42,4 @@ export const WithAuthConsumer = (WrappedComponent) => (props) => (
   </AuthContext.Consumer>
 )
  
-export default AuthContextProvider;
+export default WithClubConsumer(AuthContextProvider);

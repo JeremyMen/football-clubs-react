@@ -39,20 +39,28 @@ class FootballTable extends Component {
       })
       .catch(err => {
         this.setState({
-          errorMessage: err.response.data.message
+          errorMessage: err
         })
       })
   }
 
   componentDidMount = () => {
     this._isMounted = true
-    const { teamLeague, teamCountry } = this.props.currentClub
-    this._setLeagueTable(teamLeague, teamCountry) 
+    // const { teamLeague, teamCountry } = this.props.currentClub
+    // this._setLeagueTable(teamLeague, teamCountry) 
+    FootballClubsService.getClub(this.props.params.clubUsernameOrId)
+      .then(club => {
+        this._setLeagueTable(club.data.teamLeague, club.data.teamCountry)          
+      })
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { teamLeague, teamCountry } = this.props.currentClub
-    this._setLeagueTable(teamLeague, teamCountry)  
+    this._isMounted = true
+    // const { teamLeague, teamCountry } = this.props.currentClub
+    FootballClubsService.getClub(this.props.params.clubUsernameOrId)
+      .then(club => {
+        this._setLeagueTable(club.data.teamLeague, club.data.teamCountry)          
+      })
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -65,6 +73,8 @@ class FootballTable extends Component {
 
   render() { 
     const { leagueTable } = this.state
+    console.log(this.props, 'propstable')
+
 
     return (  
       <div>

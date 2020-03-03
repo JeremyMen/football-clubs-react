@@ -125,6 +125,7 @@ class NewClub extends Component {
       FootballClubsService.createClub(formData)
         .then(newClub => {
           this.props.setMyClub(newClub.data)
+          this.props.setCurrentClub(newClub.data)
           this.props.setUser({...this.props.currentUser, club: newClub.data.id  })
           this.props.history.push(`/clubs/${newClub.data.username}`)
         })
@@ -134,22 +135,6 @@ class NewClub extends Component {
           })
         })
     })
-
-    
-    // FootballClubsService.createClub(formData)
-    //   .then(newClub => {
-    //     this.setState({
-    //       error: false
-    //     })
-    //     this.props.setMyClub(newClub.data)
-    //     this.props.setUser({...this.props.currentUser, club: newClub.data.id  })
-    //     this.props.history.push(`/clubs/${newClub.data.username}`)
-    //   })
-    //   .catch((error) => {
-    //     this.setState({
-    //       error: true
-    //     })
-    //   })
   }
   
   render() { 

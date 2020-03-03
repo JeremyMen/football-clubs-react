@@ -3,15 +3,21 @@ import FootballClubsService from '../../services/FootballClubsService'
 import ClubCard from './ClubCard'
 import { Link } from 'react-router-dom'
 import '../../stylesheets/ClubsList.css'
+import { WithClubConsumer } from '../../contexts/ClubContext'
 
 class ClubsList extends Component {
 
-  state = { 
-    data: {
-      clubs: [],
-    },
-    error: undefined
+  constructor(props) {
+    super(props)
+    this.state = { 
+      data: {
+        clubs: [],
+      },
+      error: undefined
+    }
+
   }
+
 
   _getNumberOfMembers = (clubUsername) => {
     FootballClubsService.getMembers(clubUsername)
@@ -40,6 +46,7 @@ class ClubsList extends Component {
   }
 
   componentDidMount() {
+    this.props.setCurrentClub()
     this._setClubs()
   }
 
@@ -85,4 +92,4 @@ class ClubsList extends Component {
   }
 }
  
-export default ClubsList;
+export default WithClubConsumer(ClubsList);

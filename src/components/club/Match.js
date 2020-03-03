@@ -48,9 +48,14 @@ class Match extends Component {
 
   componentDidMount = () => {
     this._isMounted = true
-    const { team } = this.props.currentClub
-    this._setNextMatch(team, 1)
-    this._setPrevioustMatch(team, 1)
+    // const { team } = this.props.currentClub
+    FootballClubsService.getClub(this.props.params.clubUsernameOrId)
+      .then(club => {
+        this._setNextMatch(club.data.team, 1)
+        this._setPrevioustMatch(club.data.team, 1)
+      })
+    // this._setNextMatch(team, 1)
+    // this._setPrevioustMatch(team, 1)
   }
 
   componentDidUpdate = () => {
