@@ -1,5 +1,8 @@
+.maxw-75 {
+  max-width: 75px;
+}
 .maxw-100 {
-  max-width: 100px;
+	max-width: 100px;
 }
 .mw-130 {
   max-width: 130px;
@@ -9,6 +12,13 @@
 }
 .fs-25 {
   font-size: 25px;
+}
+.Navbar {
+	background: url('../stylesheets/images/responsiveBannerSection.jpg');
+	background-size: cover;
+}
+.color-white {
+	color: white;
 }
 
 /* ============== SEARCH FORM ============= */

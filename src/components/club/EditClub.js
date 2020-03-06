@@ -4,6 +4,7 @@ import { WithAuthConsumer } from '../../contexts/AuthContext';
 import { Redirect } from 'react-router-dom';
 import FootballClubsService from '../../services/FootballClubsService';
 import '../../stylesheets/Edit.css'
+import '../../stylesheets/Form.css'
 import { WithClubConsumer } from '../../contexts/ClubContext';
 
 class Edit extends Component {
@@ -61,7 +62,11 @@ class Edit extends Component {
         })
         this.props.setMyClub(null)
         this.props.setCurrentClub(null)
-        this.props.history.push(`/clubs`)
+        FootballClubsService.getUser(this.props.currentUser.username)
+          .then(user => {
+            this.props.setUser(user.data)
+            this.props.history.push(`/clubs`)
+          })
       })
       .catch(err => {
         this.setState({
@@ -103,9 +108,10 @@ class Edit extends Component {
       } else {
         return (  
           
-          <div className="Edit container">
+          <div className="Edit">
             <Navbar />
-            <div className="hd-lg">
+            <div className="hd-lg container pt-5">
+              <img src={this.props.currentClub.emblem} alt="logo"  className="rounded mw-170"/>
               <span>Edit your Football Club</span>
             </div>
             <div className="user-account-pr">
@@ -140,28 +146,26 @@ class Edit extends Component {
                     placeholder="Address" 
                   />
                 </div>
-                <div className="input-sec d-flex justify-content-between">
-                  <label htmlFor="profilePicture">Emblem</label>
+                <div className="input-sec custom-file">
+                  <label className="custom-file-label d-flex" htmlFor="emblem">Emblem</label>
                   <input
                     onChange={this.handleChange}
                     name="emblem"
                     type="file"
-                    className={`form-control ${errorClassName} mw-165`}
+                    className={`custom-file-input form-control ${errorClassName} mw-165`}
                     id="emblem"
                   />
                 </div>
-                <div className="input-sec mb-0">
+                <div className="input-sec mt-2 mb-0">
                   <button type="submit">Edit</button>
                 </div>
               </form>
-              <form onClick={this.deleteAccount}>
-                <div className="input-sec mb-0">
-                  <button className={`form-control ${errorClassName}`} type="submit">Delete</button>
+                <div className="input-sec mb-4">
+                  <button onClick={this.deleteAccount} className={`bg-red color-white form-control ${errorClassName}`} type="submit">Delete</button>
                 </div>
                 <div className="color-red">
                   {errorMessage}
                 </div>
-              </form>
             </div>
           </div>
         );

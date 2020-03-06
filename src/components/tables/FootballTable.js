@@ -45,9 +45,7 @@ class FootballTable extends Component {
   }
 
   componentDidMount = () => {
-    this._isMounted = true
-    // const { teamLeague, teamCountry } = this.props.currentClub
-    // this._setLeagueTable(teamLeague, teamCountry) 
+    this._isMounted = true 
     FootballClubsService.getClub(this.props.params.clubUsernameOrId)
       .then(club => {
         this._setLeagueTable(club.data.teamLeague, club.data.teamCountry)          
@@ -56,7 +54,6 @@ class FootballTable extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     this._isMounted = true
-    // const { teamLeague, teamCountry } = this.props.currentClub
     FootballClubsService.getClub(this.props.params.clubUsernameOrId)
       .then(club => {
         this._setLeagueTable(club.data.teamLeague, club.data.teamCountry)          
@@ -73,8 +70,6 @@ class FootballTable extends Component {
 
   render() { 
     const { leagueTable } = this.state
-    console.log(this.props, 'propstable')
-
 
     return (  
       <div>

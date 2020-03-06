@@ -1,30 +1,12 @@
-/* .profile_area .col-lg-7 {
-  vertical-align: middle;
-  align-self: center; 
-}
-.height-351 {
-  height: 351.95px;
-}
-.mw-290 {
-  max-width: 290px;
-}
-.font-size-larger {
-  font-size: larger;
-} */
 .mw-200 {
   max-width: 200px;
 }
 .profile-content {
   margin-top: 100px;
 }
-.main-raised {
-  border-radius: 6px;
-  box-shadow: 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2)
-}
-
 .background-field {
-  background-image: linear-gradient(to bottom, rgba(3, 3, 3, 0) 20%, rgb(252, 252, 252) 100%), url("../../src/stylesheets//images/soccer-field-bg.jpg");
-  /* background: url("../../src/stylesheets//images/soccer-field-bg.jpg") no-repeat; */
+  background-image: linear-gradient(to bottom, rgba(3, 3, 3, 0) -30%, rgb(255, 255, 255) 100%), url("../../src/stylesheets//images/soccer-field-bg.jpg");
+  /* background-image: linear-gradient(to top, rgba(3, 3, 3, 0) -10%, rgb(255, 255, 255) 100%), url("../../src/stylesheets//images/soccer-field-bg.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 6px;

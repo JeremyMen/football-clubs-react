@@ -10,9 +10,9 @@ class Home extends Component {
   state = {  }
   render() { 
     return ( 
-      <div className="Home container">
+      <div className="Home">
         <Navbar />
-        <div className="container">
+        <div className="container pt-5">
           <ClubsList />
         </div>
       </div>

@@ -36,7 +36,9 @@ class Club extends Component {
               <div className="official center mt-3 ml-2 mr-2">
                 { this.props.isOfficialClub }
               </div>
-              <img src={ this.props.emblem } className="mw-100" alt="emblem" />
+              <div className="d-flex justify-content-center">
+                <img src={ this.props.emblem } className="mw-100" alt="emblem" />
+              </div>
               <div className="members center mb-3 ml-2 mr-2">
                 { this.state.numberOfMembers } Members
               </div>
@@ -63,21 +65,21 @@ class Club extends Component {
                 </span>
               </div>
               <div className="stats">
-                <div>
+                {/* <div>
                   <div className="title">Awards</div>
                   <i className="fa fa-trophy"></i>
                   <div className="value">2</div>
-                </div>
+                </div> */}
                 <div>
                   <div className="title">Matches</div>
-                  <i className="fa fa-gamepad"></i>
-                  <div className="value">27</div>
+                  <i class="fa fa-calendar"></i>
+                  <div className="value">1</div>
                 </div>
-                <div>
+                {/* <div>
                   <div className="title">Pals</div>
                   <i className="fa fa-group"></i>
                   <div className="value">123</div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -88,7 +90,6 @@ class Club extends Component {
             <p>
               { this.props.description }
             </p>
-            <span className="more">Mouse over the card for more info</span>
           </div>
         </div>
       </div>

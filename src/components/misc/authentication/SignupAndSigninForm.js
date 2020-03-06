@@ -18,7 +18,7 @@ class SignupAndSigninForm extends Component {
       error: false,
       errorMessage: ''
     }
-
+    this._isMounted = false
   }
 
   handleChange = (event) => {
@@ -33,6 +33,7 @@ class SignupAndSigninForm extends Component {
   }
 
   handleSubmit = (event) => {
+    this._isMounted = true
     event.preventDefault()
     const { pathname } = this.props
     const { data } = this.state
@@ -55,7 +56,7 @@ class SignupAndSigninForm extends Component {
         .catch((err) => {
           this.setState({
             error: true,
-            errorMessage: err.response.data.message
+            errorMessage: err
           })
         })  
     } else if (pathname === '/login'){
@@ -65,24 +66,30 @@ class SignupAndSigninForm extends Component {
           error: false
         })
         this.props.setUser(user.data)
+        this.props.setMyClub()
+        this.props.setCurrentClub()
       })
       .catch((err) => {
         this.setState({
           error: true,
-          errorMessage: err.response.data.message
+          errorMessage: err
 
         })
       }) 
     }
-    
+  }
+
+  componentWillUnmount = () => {
+    this._isMounted = false
   }
 
   render() {
+    console.log(this.errorMessage)
     const errorClassName = this.state.error ? 'is-invalid' : ''
     const { pathname } = this.props
-    const errorMessage = this.state.errorMessage ? 
-      this.state.errorMessage :
-      ''
+    // const errorMessage = this.state.errorMessage ? 
+    //   this.state.errorMessage :
+    //   ''
 
     const loginForm = 
       <div>
@@ -134,13 +141,13 @@ class SignupAndSigninForm extends Component {
 
       { loginForm }
 
-      <div className="input-sec d-flex justify-content-between">
-        <label htmlFor="profilePicture">Profile picture</label>
+      <div className="input-sec custom-file d-flex">
+        <label className="custom-file-label" htmlFor="profilePicture">Profile picture</label>
         <input
           onChange={this.handleChange}
           name="profilePicture"
           type="file"
-          className={`form-control ${errorClassName} mw-165`}
+          className={`custom-file-input form-control ${errorClassName} mw-165`}
           id="profilePicture"
         />
       </div>
@@ -161,9 +168,9 @@ class SignupAndSigninForm extends Component {
               <div className="input-sec mb-0">
                 <button type="submit">Signup</button>
               </div>
-              <div className="color-red">
+              {/* <div className="color-red">
                 {errorMessage}
-              </div>
+              </div> */}
             </form>
           </div>
 
@@ -186,9 +193,9 @@ class SignupAndSigninForm extends Component {
             <div className="input-sec mb-0">
               <button type="submit">Login</button>
             </div>
-            <div className="color-red">
+            {/* <div className="color-red">
               {errorMessage}
-            </div>
+            </div> */}
             </form>
           </div>
 

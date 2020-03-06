@@ -19,26 +19,27 @@ class Navbar extends Component {
   }
 
   _setClubButton = () => {
-    const myClubIcon =
-      <div>
-        <a href={`/clubs/${ this.props.currentUser.club }`} className="color-black mr-4 text-decoration-none">
-          <i className="fa fa-users mr-1 fs-25"></i>MyClub
-        </a>
-      </div>
-    
-    const newClubIcon = 
-      <div>
-        <Link to="/clubs/new" className="color-black mr-4 text-decoration-none">
-          <i className="fa fa-user-plus mr-1 fs-25"></i>NewClub
-        </Link>
-      </div>
+    const { club } = this.props.currentUser
 
-    const { currentClub } = this.props
-    const clubButton = currentClub ? myClubIcon : newClubIcon
-
-    if (this._isMounted) {
+    if (club) {
+      const myClubIcon =
+        <div>
+          <Link to={`/clubs/${ club }`} className="color-white mr-4 text-decoration-none">
+            <i className="fa fa-users mr-1 fs-25"></i>MyClub
+          </Link>
+        </div>
       this.setState({
-        clubButton
+        clubButton: myClubIcon
+      })
+    } else {
+      const newClubIcon = 
+        <div>
+          <Link to="/clubs/new" className="color-white mr-4 text-decoration-none">
+            <i className="fa fa-user-plus mr-1 fs-25"></i>NewClub
+          </Link>
+        </div>
+      this.setState({
+        clubButton: newClubIcon
       })
     }
   }
@@ -74,19 +75,17 @@ class Navbar extends Component {
   }
 
   render() {
-
-    console.log(this.props)
   
     const logo = 
-      <div className="maxw-100 col-sm d-flex align-items-center" >
+      <div className="col-sm-2 pl-0 pt-2 pb-2" >
         <Link to="/clubs" title="">
-          <img src="../../../footballclubsLogo_Black.png" alt="logo" className="mw-100" />
+          <img src="../../../footballclubsLogo_White.png" alt="logo" className="d-flex maxw-75" />
         </Link>
       </div>
     
     const searchForm = 
-      <div className="search-form col-sm d-flex align-items-center justify-content-center">
-        <form className="d-flex">
+      <div className="search-form d-flex align-items-center justify-content-center col-sm-6">
+        <form>
           <input type="text" name="search" placeholder="Search a Football Club" />
           <button type="submit">
             <i className="fa fa-search"></i>
@@ -96,7 +95,7 @@ class Navbar extends Component {
       
     const homeIcon =
       <div>
-        <Link to="/clubs" className="color-black mr-4 text-decoration-none">
+        <Link to="/clubs" className="color-white mr-3 text-decoration-none">
           <i className="fa fa-home mr-1 fs-25"></i>Home
         </Link>
       </div>
@@ -104,7 +103,7 @@ class Navbar extends Component {
     const dropdownMenu = 
       <ul className="nav ">
         <li className="nav-item dropdown">
-            <div className="nav-link dropdown-toggle maxw-100" data-toggle="dropdown">
+            <div className="nav-link dropdown-toggle maxw-100 color-white" data-toggle="dropdown">
               <img src={this.props.currentUser.profilePicture} alt=""  className="mw-100 rounded-circle"/>
             </div>
             <div className="dropdown-menu dropdown-menu-right">
@@ -133,23 +132,24 @@ class Navbar extends Component {
         </li>
       </ul>
       return (
-        <nav className="Navbar mt-3">
-          <div className="row">  
-            { logo }
-            { searchForm }
-            <div className="col-sm-4 d-flex align-items-center justify-content-around">
-              <div className="d-flex">
-                <div>
-                  { homeIcon }
+        <nav className="Navbar">
+          <div className="container">  
+            <div className="row">
+              { logo }
+              { searchForm }
+              <div className="col-sm-4 d-flex align-items-center justify-content-around">
+                <div className="d-flex">
+                  <div>
+                    { homeIcon }
+                  </div>
+                  <div>
+                    { this.state.clubButton }
+                  </div>
                 </div>
-                <div>
-                  { this.state.clubButton }
-                </div>
+                { dropdownMenu }
               </div>
-              { dropdownMenu }
             </div>
           </div>
-          <hr />
         </nav>
       )
   }

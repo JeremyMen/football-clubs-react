@@ -51,9 +51,9 @@ class Profile extends Component {
   render() {
     const { currentUser, userClub } = this.state
     return (  
-      <div className="container">
+      <div className="Profile">
         <Navbar />
-        <div className="profile-page container">
+        <div className="profile-page container pt-5">
         <div className="main main-raised">
           <div className="background-field">
 

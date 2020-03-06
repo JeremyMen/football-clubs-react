@@ -147,9 +147,9 @@ class NewClub extends Component {
 
     const errorClassName = error ? 'is-invalid' : ''
     return (  
-      <div className="NewClub container">
+      <div className="NewClub">
         <Navbar />
-        <div className="Form">
+        <div className="Form container">
           <div className="hd-lg">
             <span>Register your Football Clubs</span>
           </div>
@@ -194,7 +194,7 @@ class NewClub extends Component {
                 <textarea id="w3mission" rows="4" cols="50" 
                   value={this.state.data.description}
                   onChange={this.handleChange}
-                  className={`form-control ${errorClassName}`}
+                  className={`form-control input-textarea ${errorClassName}`}
                   type="text" 
                   name="description" 
                   placeholder="Club description" 
@@ -281,13 +281,13 @@ class NewClub extends Component {
                 </select>
               </div>
 
-              <div className="input-sec d-flex justify-content-between">
-                <label htmlFor="emblem">Emblem</label>
+              <div className="input-sec custom-file">
+                <label className="custom-file-label d-flex" htmlFor="emblem">Emblem</label>
                 <input
                   onChange={this.handleChange}
                   name="emblem"
                   type="file"
-                  className={`form-control ${errorClassName} mw-165`}
+                  className={`custom-file-input form-control ${errorClassName} mw-165`}
                   id="emblem"
                 />
               </div>

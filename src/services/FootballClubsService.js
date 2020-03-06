@@ -5,17 +5,17 @@ const http = axios.create({
   withCredentials: true
 })
 
-http.interceptors.response.use(
-  response => response,
-  error => {
-    if (error.response && error.response.status === 401) {
-      localStorage.clear()
-      window.location.assign('/login')
-    }
+// http.interceptors.response.use(
+//   response => response,
+//   error => {
+//     if (error.response && error.response.status === 401) {
+//       localStorage.clear()
+//       window.location.assign('/login')
+//     }
 
-    return Promise.reject(error)
-  }
-)
+//     return Promise.reject(error)
+//   }
+// )
 
 //base
 const login = ({ email, password }) => http.post('/login', { email, password })
@@ -34,7 +34,13 @@ const getClubs = () => http.get('/clubs').then(res => res.data)
 const getMembers = (clubUsername) => http.get(`/clubs/${clubUsername}/users`).then(users => users.data)
 const updateClub = (clubUsername, data) => http.patch(`/clubs/${clubUsername}`, data)
 const deleteClub = (clubUsername) => http.delete(`/clubs/${clubUsername}`)
+const subscribe = (clubUsername, userUsername) => http.post(`/clubs/${clubUsername}/users/${userUsername}/subscription`)
+const unsubscribe = (clubUsername, userUsername) => http.delete(`/clubs/${clubUsername}/users/${userUsername}/unsubscription`)
 
+//events
+const createEvent = (data, clubUsername) => http.post(`/events/clubs/${clubUsername}`, data)
+const getClubEvents = (clubUsername) => http.get(`/events/clubs/${clubUsername}`)
+const participateEvent = (eventId, userUsername) => http.post(`/events/${eventId}/users/${userUsername}/participation`)
 
 //apiFootball
 const getTeam = (teamName) => http.get(`/teams/${teamName}`)
@@ -57,6 +63,11 @@ export default {
   getClubs,
   updateClub,
   deleteClub,
+  subscribe,
+  unsubscribe,
+  createEvent,
+  getClubEvents,
+  participateEvent,
   getMembers,
   getTeam,
   getLeague,

@@ -85,22 +85,47 @@ class Match extends Component {
 
   render() {
     const { nextMatches, previousMatches } = this.state
+
+    const showNextMatches = 
+      nextMatches ? 
+        <div className="d-flex justify-content-around mt-4">
+          <div>
+            <img className="max-width-60" src={ nextMatches ? nextMatches.homeTeam.logo : null } alt="emblem1"/>
+          </div>
+          <span className="fs-32"> - </span>
+          <div>
+            <img className="max-width-60" src={ nextMatches ? nextMatches.awayTeam.logo : null } alt="emblem2"/>
+          </div>
+        </div> :
+        <div className="d-flex justify-content-center mt-4">
+          <img className="width-100" src="../../../Spinner-1s-200px.gif" alt="loading"></img>
+        </div>
+
+      const showPreviousMatches =
+        previousMatches ?
+        <div className="d-flex justify-content-around mt-4">
+          <div>
+            <img className="max-width-60" src={ previousMatches ? previousMatches.homeTeam.logo : null } alt="emblem1"/>
+            <span className="fs-32 pl-2">{ previousMatches ? previousMatches.goalsHomeTeam : null }</span>
+          </div>
+          <span className="fs-32"> - </span>
+          <div>
+            <span className="fs-32 pr-2">{ previousMatches ? previousMatches.goalsAwayTeam : null }</span>
+            <img className="max-width-60" src={ previousMatches ? previousMatches.awayTeam.logo : null } alt="emblem2"/>
+          </div>
+        </div> :
+        <div className="d-flex justify-content-center mt-4">
+          <img className="width-100" src="../../../Spinner-1s-200px.gif" alt="loading"></img>
+        </div>
+      
     return ( 
-      <div className="Match d-flex">
+      <div className="Match d-flex mw-100 mb-3">
         <div className="card w-300 h-200">
           <div className="card-body">
             <div className="text-center">
               <h5 className="card-title fs-16">Next match ({ nextMatches ? nextMatches.league.name: null })</h5>
             </div>
-            <div className="d-flex justify-content-around mt-4">
-              <div>
-                <img className="mw-80" src={ nextMatches ? nextMatches.homeTeam.logo : null } alt="emblem1"/>
-              </div>
-              <span className="fs-36"> - </span>
-              <div>
-                <img className="mw-80" src={ nextMatches ? nextMatches.awayTeam.logo : null } alt="emblem2"/>
-              </div>
-            </div>
+            {showNextMatches}
           </div>
         </div>
         
@@ -109,17 +134,7 @@ class Match extends Component {
             <div className="text-center">
               <h5 className="card-title fs-16">Previous match ({ previousMatches ? previousMatches.league.name : null })</h5>
             </div>
-            <div className="d-flex justify-content-around mt-4">
-              <div>
-                <img className="mw-80" src={ previousMatches ? previousMatches.homeTeam.logo : null } alt="emblem1"/>
-                <span className="fs-36 pl-2">{ previousMatches ? previousMatches.goalsHomeTeam : null }</span>
-              </div>
-              <span className="fs-36"> - </span>
-              <div>
-                <span className="fs-36 pr-2">{ previousMatches ? previousMatches.goalsAwayTeam : null }</span>
-                <img className="mw-80" src={ previousMatches ? previousMatches.awayTeam.logo : null } alt="emblem2"/>
-              </div>
-            </div>
+            { showPreviousMatches }
           </div>
         </div>
       </div>

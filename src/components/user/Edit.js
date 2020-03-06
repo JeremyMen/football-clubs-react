@@ -4,6 +4,7 @@ import { WithAuthConsumer } from '../../contexts/AuthContext';
 import { Redirect } from 'react-router-dom';
 import FootballClubsService from '../../services/FootballClubsService';
 import '../../stylesheets/Edit.css'
+import '../../stylesheets/Edit.css'
 
 class Edit extends Component {
   state = {  
@@ -51,7 +52,7 @@ class Edit extends Component {
     event.preventDefault()
 
     FootballClubsService.deleteUser(this.props.currentUser.username)
-      .then((res) => {
+      .then(() => {
         this.setState({
           error: false
         })
@@ -95,9 +96,10 @@ class Edit extends Component {
     } else {
       return (  
         
-        <div className="Edit container">
+        <div className="Edit">
           <Navbar />
-          <div className="hd-lg">
+          <div className="hd-lg container pt-5">
+            <img src={ this.props.currentUser.profilePicture } alt="logo"  className="rounded mw-170"/>
             <span>Edit your profile</span>
           </div>
           <div className="user-account-pr">
@@ -122,28 +124,26 @@ class Edit extends Component {
                   placeholder="Password" 
                 />
               </div>
-              <div className="input-sec d-flex justify-content-between">
-                <label htmlFor="profilePicture">Profile picture</label>
+              <div className="input-sec custom-file">
+                <label className="custom-file-label d-flex" htmlFor="profilePicture">Profile picture</label>
                 <input
                   onChange={this.handleChange}
                   name="profilePicture"
                   type="file"
-                  className={`form-control ${errorClassName} mw-165`}
+                  className={`custom-file-input form-control ${errorClassName}`}
                   id="profilePicture"
                 />
               </div>
-              <div className="input-sec mb-0">
+              <div className="input-sec mb-0 mt-2">
                 <button type="submit">Edit</button>
               </div>
             </form>
-            <form onClick={this.deleteAccount}>
-              <div className="input-sec mb-0">
-                <button className={`form-control ${errorClassName}`} type="submit">Delete</button>
+              <div className="input-sec delete mb-5">
+                <button onClick={this.deleteAccount} className={`bg-red color-white form-control ${errorClassName}`} type="submit">Delete</button>
               </div>
               <div className="color-red">
                 {errorMessage}
               </div>
-            </form>
           </div>
         </div>
       );

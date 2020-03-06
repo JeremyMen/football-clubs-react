@@ -1,0 +1,26 @@
+.NewEvent {
+  min-width: 80%;
+}
+.min-width-100 {
+  min-width: 100%;
+}
+.w-fit-con {
+  width: fit-content;
+}
+.h-fit-con {
+  height: fit-content;
+}
+.button {
+	height: 38px;
+	padding-left:10px;
+	background-color: #e2ebef;
+	border-radius: 5px;
+	border:none;
+	padding: 0 15px;
+	width: 100%;
+}
+.button{
+	margin-bottom:18px;
+	color: #fff;
+	background-color: #272626;
+}

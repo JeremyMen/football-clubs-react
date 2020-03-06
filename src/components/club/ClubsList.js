@@ -18,17 +18,6 @@ class ClubsList extends Component {
 
   }
 
-
-  _getNumberOfMembers = (clubUsername) => {
-    FootballClubsService.getMembers(clubUsername)
-      .then(members => members.length)
-      .catch(error => {
-        this.setState({
-          error
-        })
-      })
-  }
-
   _setClubs = () => {
     FootballClubsService.getClubs()
     .then(clubs => {
@@ -71,7 +60,6 @@ class ClubsList extends Component {
             <ClubCard
               username = { club.username }
               isOfficialClub = { club.isOfficialClub  ? 'Official ✓' : 'Unofficial'}
-              members = { this._getNumberOfMembers }
               name = { club.name }
               emblem = { club.emblem }
               team = { club.team }
@@ -84,7 +72,9 @@ class ClubsList extends Component {
         </div>
       )
     })
+    
     return (
+      
       <div className="ClubsList row">
         { allClubs }
       </div>
